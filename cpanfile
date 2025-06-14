@@ -1,0 +1,11 @@
+requires 'File::Find::Rule';
+requires 'Mojolicious::Lite';
+requires 'Capture::Tiny';
+requires 'Crypt::Passphrase';
+requires 'Crypt::Passphrase::Argon2';
+requires 'Data::Dumper::Compact';
+requires 'Encoding::FixLatin';
+requires 'JSON::MaybeXS';
+requires 'Mojo::SQLite';
+requires 'Term::ReadKey';
+requires 'Time::Piece';
