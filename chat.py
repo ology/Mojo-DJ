@@ -1,4 +1,5 @@
 from google import genai
+from google.genai import types
 import os
 import sys
 
@@ -6,8 +7,13 @@ def get_response(prompt):
     api_key = os.environ.get("GEMINI_API_KEY")
     client = genai.Client(api_key=api_key)
     response = client.models.generate_content(
-        contents=prompt,
+        config=types.GenerateContentConfig(
+            system_instruction="You are a music radio disk jockey. Generate high quality text concerning the history of the given song and include a YouTube link at the end.",
+            max_output_tokens=1000,
+            temperature=0
+        ),
         model="gemini-2.0-flash",
+        contents=prompt,
     )
     return response.text
 
