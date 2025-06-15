@@ -86,6 +86,7 @@ sub _interpret ($seeking) {
   $response =~ s/\*\*//g;
   $response =~ s/##+//g;
   $response =~ s/\n+/<p><\/p>/g;
+  $response =~ s/\[(https:\/\/www\.youtube\.com\/watch\?v=.+?)\]\(\1\)/<iframe width="200" height="100" src="$1" frameborder="0" allow="1" allowfullscreen><\/iframe>/g;
   return $response;
 }
 
