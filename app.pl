@@ -163,7 +163,6 @@ __DATA__
     <%== fix_latin($interp) %>
     <p></p>
     <audio controls><source type="audio/wav" src="/out.wav"></audio>
-%     }
 % }
 
 @@ layouts/default.html.ep
