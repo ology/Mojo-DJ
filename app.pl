@@ -73,11 +73,16 @@ get '/app' => sub ($c) {
   if ($action eq 'interp' && $seek) {
     $interpretation = _interpret($seek);
 
+    $interpretation .= "\n<p></p><ul>";
     my $yt = WebService::YTSearch->new(key => $ENV{YOUTUBE_API_KEY});
-    my %query = (q => $seek, type => 'video', order => 'date', maxResults => 1);
+    my %query = (q => $seek, type => 'video', order => 'date', maxResults => 10);
     my $r = $yt->search(%query);
-    my $url = 'https://www.youtube.com/watch?v=' . $r->{items}[0]{id}{videoId};
-    $interpretation .= qq|\n\n<a href="$url" target="_blank" rel="noopener noreferrer">$url<\/a>|;
+    for my $result ($r->{items}->@*) {
+      my $url = 'https://www.youtube.com/watch?v=' . $result->{id}{videoId};
+      my $title = $result->{snippet}{title};
+      $interpretation .= qq|\n\n<li><a href="$url" target="_blank" rel="noopener noreferrer">$title<\/a><\/li>|;
+    }
+    $interpretation .= "\n</ul>";
   }
 
   $c->render(
