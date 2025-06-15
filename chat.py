@@ -11,16 +11,7 @@ def wave_file(filename, pcm, channels=1, rate=24000, sample_width=2):
         wf.setframerate(rate)
         wf.writeframes(pcm)
 
-def build_response(client, instruction, prompt):
-    transcript = client.models.generate_content(
-        model="gemini-2.0-flash",
-        contents=prompt,
-        config=types.GenerateContentConfig(
-            system_instruction=instruction,
-            max_output_tokens=1000,
-            temperature=0
-        ),
-    ).text
+def build_audio(client, transcript):
     response = client.models.generate_content(
         model="gemini-2.5-flash-preview-tts",
         contents=transcript,
@@ -38,6 +29,18 @@ def build_response(client, instruction, prompt):
     data = response.candidates[0].content.parts[0].inline_data.data
     file_name='public/out.wav'
     wave_file(file_name, data)
+
+def build_response(client, instruction, prompt):
+    transcript = client.models.generate_content(
+        model="gemini-2.0-flash",
+        contents=prompt,
+        config=types.GenerateContentConfig(
+            system_instruction=instruction,
+            max_output_tokens=1000,
+            temperature=0
+        ),
+    ).text
+    # build_audio(client, transcript)
     return transcript
 
 def main():
