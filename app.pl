@@ -62,7 +62,7 @@ under sub ($c) {
 
 get '/app' => sub ($c) {
   my $action = $c->param('action') || ''; # user action like 'interp'
-  my $seek   = $c->param('seek')   || ''; # song title
+  my $song   = $c->param('song')   || ''; # song title
   my $artist = $c->param('artist') || ''; # artist or band
 
   my $user_id = $c->session('user_id');
@@ -70,7 +70,8 @@ get '/app' => sub ($c) {
 
   my $interpretation = ''; # AI interpretations
 
-  if ($action eq 'interp' && $seek) {
+  if ($action eq 'interp' && $song) {
+    my $seek = $song;
     $seek .= " by $artist" if $artist;
     my $instruction = <<'INSTRUCTION';
 You are a knowledgeable musical host, your goal is to reveal the deep stories behind popular music tracks.
@@ -106,9 +107,9 @@ INSTRUCTION
 
   $c->render(
     template => 'app',
-    interp   => $interpretation,
     can_chat => $ENV{GEMINI_API_KEY} ? 1 : 0,
-    seek     => $seek,
+    interp   => $interpretation,
+    song     => $song,
     artist   => $artist,
   );
 } => 'app';
@@ -152,7 +153,7 @@ __DATA__
 % # Interpret
 %   if ($can_chat) {
   <form method="get">
-    <input type="text" class="form-control" name="seek" placeholder="Song title" value="<%= $seek %>">
+    <input type="text" class="form-control" name="song" placeholder="Song title" value="<%= $song %>">
     <p></p>
     <input type="text" class="form-control" name="artist" placeholder="Artist or band" value="<%= $artist %>">
     <p></p>
