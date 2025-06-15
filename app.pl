@@ -71,8 +71,8 @@ get '/app' => sub ($c) {
 
   my $responses = [];
   if ($action eq 'interp' && $seek) {
-    $interpretation = _interpret($seek);
-
+    my $instruction = 'Detail the history of the given song.';
+    $interpretation = _interpret($instruction, $seek);
     $interpretation .= "\n<p></p><ul>";
     my $yt = WebService::YTSearch->new(key => $ENV{YOUTUBE_API_KEY});
     my %query = (q => $seek, type => 'video', order => 'date', maxResults => 10);
@@ -93,18 +93,17 @@ get '/app' => sub ($c) {
   );
 } => 'app';
 
-sub _interpret ($seeking) {
-  my $response = _get_response('user', $seeking);
+sub _interpret ($instruction, $seeking) {
+  my $response = _get_response('user', $instruction, $seeking);
   $response =~ s/\*\*//g;
   $response =~ s/##+//g;
   $response =~ s/\n+/<p><\/p>/g;
-  $response =~ s/\[(https:\/\/www\.youtube\.com\/watch\?v=.+?)\]\(\1\)/<a href="$1" target="_blank" rel="noopener noreferrer">$1<\/a>/g;
   return $response;
 }
 
-sub _get_response ($role, $prompt) {
+sub _get_response ($role, $instruction, $prompt) {
   return unless $prompt;
-  my @cmd = (qw(python3 chat.py), $prompt);
+  my @cmd = (qw(python3 chat.py), $instruction, $prompt);
   my $stdout = capture_stdout { system @cmd };
   chomp $stdout;
   return $stdout;
