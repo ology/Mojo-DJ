@@ -62,7 +62,8 @@ under sub ($c) {
 
 get '/app' => sub ($c) {
   my $action = $c->param('action') || ''; # user action like 'interp'
-  my $seek   = $c->param('seek')   || ''; # concepts user is seeking
+  my $seek   = $c->param('seek')   || ''; # song title
+  my $artist = $c->param('artist') || ''; # artist or band
 
   my $user_id = $c->session('user_id');
   my $sql = Mojo::SQLite->new('sqlite:app.db');
@@ -70,6 +71,7 @@ get '/app' => sub ($c) {
   my $interpretation = ''; # AI interpretations
 
   if ($action eq 'interp' && $seek) {
+    $seek .= " by $artist" if $artist;
     my $instruction = <<'INSTRUCTION';
 You are a knowledgeable musical host, your goal is to reveal the deep stories behind popular music tracks.
 
@@ -107,6 +109,7 @@ INSTRUCTION
     interp   => $interpretation,
     can_chat => $ENV{GEMINI_API_KEY} ? 1 : 0,
     seek     => $seek,
+    artist   => $artist,
   );
 } => 'app';
 
@@ -151,7 +154,9 @@ __DATA__
   <form method="get">
     <input type="text" class="form-control" name="seek" placeholder="Song title" value="<%= $seek %>">
     <p></p>
-    <button type="submit" name="action" title="Submit this title for analysis" value="interp" class="btn btn-primary" id="interp">
+    <input type="text" class="form-control" name="artist" placeholder="Artist or band" value="<%= $artist %>">
+    <p></p>
+    <button type="submit" name="action" title="Submit this song for analysis" value="interp" class="btn btn-primary" id="interp">
       Submit</button>
   </form>
   <p></p>
