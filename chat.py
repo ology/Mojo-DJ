@@ -8,7 +8,7 @@ def get_response(prompt):
     client = genai.Client(api_key=api_key)
     response = client.models.generate_content(
         config=types.GenerateContentConfig(
-            system_instruction="You are a music radio disk jockey. Generate high quality text concerning the history of the given song and include a YouTube link of the given song at the end.",
+            system_instruction="You are a music radio disc jockey. Generate high quality text concerning the history of the given song.",
             max_output_tokens=1000,
             temperature=0
         ),
