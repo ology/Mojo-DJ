@@ -36,7 +36,7 @@ def build_response(client, instruction, prompt):
         )
     )
     data = response.candidates[0].content.parts[0].inline_data.data
-    file_name='out.wav'
+    file_name='public/out.wav'
     wave_file(file_name, data)
     return transcript
 
