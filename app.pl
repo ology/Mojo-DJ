@@ -151,9 +151,12 @@ __DATA__
   <form method="get">
     <input type="text" class="form-control" name="seek" placeholder="Song title" value="<%= $seek %>">
     <p></p>
-    <button type="submit" name="action" title="Interpret this reading" value="interp" class="btn btn-primary" id="interp">
+    <button type="submit" name="action" title="Submit this title for analysis" value="interp" class="btn btn-primary" id="interp">
       Submit</button>
+%     if ($interp) {
     &nbsp;
+    <audio controls><source type="audio/wav" src="/out.wav"></audio>
+%     }
   </form>
   <p></p>
 %   }
