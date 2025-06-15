@@ -70,11 +70,11 @@ get '/app' => sub ($c) {
   my $interpretation = ''; # AI interpretations
 
   if ($action eq 'interp' && $seek) {
-    my $instruction = 'Detail the history of the given song.';
+    my $instruction = 'You are a radio disc jockey. Detail the history of the given song.';
     $interpretation = _interpret($instruction, $seek);
     $interpretation .= "\n<p></p><ul>";
     my $yt = WebService::YTSearch->new(key => $ENV{YOUTUBE_API_KEY});
-    my %query = (q => $seek, type => 'video', order => 'date', maxResults => 10);
+    my %query = (q => $seek, type => 'video', maxResults => 1);
     my $r = $yt->search(%query);
     for my $result ($r->{items}->@*) {
       my $url = 'https://www.youtube.com/watch?v=' . $result->{id}{videoId};
