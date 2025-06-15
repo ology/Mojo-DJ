@@ -69,7 +69,6 @@ get '/app' => sub ($c) {
 
   my $interpretation = ''; # AI interpretations
 
-  my $responses = [];
   if ($action eq 'interp' && $seek) {
     my $instruction = 'Detail the history of the given song.';
     $interpretation = _interpret($instruction, $seek);
