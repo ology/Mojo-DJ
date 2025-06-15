@@ -60,8 +60,8 @@ under sub ($c) {
 };
 
 get '/app' => sub ($c) {
-  my $action = $c->param('action')  || '';  # user action like 'interp'
-  my $seek   = $c->param('seek')    || '';  # concepts user is seeking
+  my $action = $c->param('action') || '';  # user action like 'interp'
+  my $seek   = $c->param('seek')   || '';  # concepts user is seeking
 
   my $user_id = $c->session('user_id');
   my $sql = Mojo::SQLite->new('sqlite:app.db');
