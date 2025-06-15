@@ -153,10 +153,6 @@ __DATA__
     <p></p>
     <button type="submit" name="action" title="Submit this title for analysis" value="interp" class="btn btn-primary" id="interp">
       Submit</button>
-%     if ($interp) {
-    &nbsp;
-    <audio controls><source type="audio/wav" src="/out.wav"></audio>
-%     }
   </form>
   <p></p>
 %   }
@@ -165,6 +161,9 @@ __DATA__
 % if ($interp) {
     <hr>
     <%== fix_latin($interp) %>
+    <p></p>
+    <audio controls><source type="audio/wav" src="/out.wav"></audio>
+%     }
 % }
 
 @@ layouts/default.html.ep
