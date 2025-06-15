@@ -60,9 +60,8 @@ under sub ($c) {
 };
 
 get '/app' => sub ($c) {
-  my $action  = $c->param('action')  || '';  # user action like 'interp'
-  my $seek    = $c->param('seek')    || '';  # concepts user is seeking
-  my $comment = $c->param('comment') || 0;   # for interpretation
+  my $action = $c->param('action')  || '';  # user action like 'interp'
+  my $seek   = $c->param('seek')    || '';  # concepts user is seeking
 
   my $user_id = $c->session('user_id');
   my $sql = Mojo::SQLite->new('sqlite:app.db');
@@ -71,53 +70,19 @@ get '/app' => sub ($c) {
 
   my $responses = [];
   if ($action eq 'interp' && $seek) {
-    $interpretation = _interpret($seek, $comment);
+    $interpretation = _interpret($seek);
   }
 
   $c->render(
     template => 'app',
-    mobile   => $c->browser->mobile ? 1 : 0,
     interp   => $interpretation,
     can_chat => $ENV{GEMINI_API_KEY} ? 1 : 0,
     seek     => $seek,
-    comment  => $comment,
   );
 } => 'app';
 
-sub _interpret ($seeking, $comment) {
-  my $prompt = "You are a Stoic scholar. Generate high quality text concerning '$seeking', quoting specific excepts from the writings of Stoic thinkers.";
-  $prompt .= <<"PROMPT";
-
-VOICE RULES:
-- Skip ALL standard AI openings ('let's dive in, delve into' etc.)
-PROMPT
-
-if ($comment) {
-  $prompt .= <<"PROMPT";
-- Jump straight into the Stoic advice
-- Talk like a traditional philosophy scholar, not a corporate chatbot
-
-READING STRUCTURE:
-- Build a flowing narrative between excerpts
-- Balance mystery with clear insights
-PROMPT
-}
-
-  $prompt .= <<"PROMPT";
-
-ABSOLUTELY AVOID:
-- Using any preamble or introductory text
-- Academic language
-- Customer service politeness
-- Meta-commentary about the advice
-- Fancy vocabulary
-- Cookie-cutter transitions
-- Hedging words (perhaps/maybe/might)
-- ANY intro phrases or other narrative devices common to AI
-- Suggesting the creation of a vision board, list, or journal
-PROMPT
-
-  my $response = _get_response('user', $prompt);
+sub _interpret ($seeking) {
+  my $response = _get_response('user', $seeking);
   $response =~ s/\*\*//g;
   $response =~ s/##+//g;
   $response =~ s/\n+/<p><\/p>/g;
@@ -131,10 +96,6 @@ sub _get_response ($role, $prompt) {
   chomp $stdout;
   return $stdout;
 }
-
-app->plugin('AdditionalValidationChecks');
-app->plugin('browser_detect');
-app->plugin('RemoteAddr');
 
 app->start;
 
@@ -159,14 +120,11 @@ __DATA__
 % # Interpret
 %   if ($can_chat) {
   <form method="get">
-    <textarea class="form-control" name="seek" placeholder="Concept, question, or verse"><%= $seek %></textarea>
+    <input type="text" class="form-control" name="seek" placeholder="Song title" value="<%= $seek %>">
     <p></p>
     <button type="submit" name="action" title="Interpret this reading" value="interp" class="btn btn-primary" id="interp">
-      Ask</button>
+      Submit</button>
     &nbsp;
-    <input class="form-check-input" type="checkbox" value="1" id="comment" name="comment" <%= $comment ? 'checked' : '' %> style="margin-top: 9px;">
-    <label class="form-check-label" for="comment">
-      Commentary</label>
   </form>
   <p></p>
 %   }
