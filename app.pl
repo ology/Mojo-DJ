@@ -93,7 +93,7 @@ sub _interpret ($seeking) {
 sub _get_response ($role, $prompt) {
   return unless $prompt;
   my @cmd = (qw(python3 chat.py), $prompt);
-  my $stdout = capture_stdout { system(@cmd) };
+  my $stdout = capture_stdout { system @cmd };
   chomp $stdout;
   return $stdout;
 }
