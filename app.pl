@@ -85,7 +85,7 @@ Create a compelling factual story that helps me hear this song in a new way. You
 
 Use a tone and register appropriate for a sophisticated audience. Use accessible language without getting folksy. Avoid stereotypical radio disc jockey communication styles. Do not start with anything like "All right music fans…". Introduce the song, but assume the show is already in progress. Use an appropriate intro to the bring the listener in and an outro as the song begins.
 
-***Absolutely never use dialectical narrative structures. No thesis-antithesis-synthesis, no "it's not just x, it's also y,"*** No staccato sentences. Do not use paragraph headers. Do NOT wax philosophical. Do NOT repeat yourself.
+***Absolutely never use dialectical narrative structures. No thesis-antithesis-synthesis, no "it's not just x, it's also y,"*** No staccato sentences. Do not use paragraph headers. Do NOT wax philosophical. Do NOT repeat yourself. Do not say "Let's listen to the song now" or introduce the audio of the song.
 
 YOU MUST NOT GENERATE INFORMATION THAT IS NOT SUPPORTED BY YOUR TRAINING DATA OR PROVIDED CONTEXT. Any invention or speculation is a fundamental failure.
 INSTRUCTION
