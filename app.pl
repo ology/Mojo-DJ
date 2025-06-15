@@ -6,7 +6,8 @@ use Crypt::Passphrase ();
 use Crypt::Passphrase::Argon2 ();
 use Data::Dumper::Compact qw(ddc);
 use Encoding::FixLatin qw(fix_latin);
-use Mojo::SQLite;
+use Mojo::SQLite ();
+use WebService::YTSearch ();
 
 helper fix_latin => sub ($c, $string) { # for use in the template
   return fix_latin($string);
@@ -71,6 +72,12 @@ get '/app' => sub ($c) {
   my $responses = [];
   if ($action eq 'interp' && $seek) {
     $interpretation = _interpret($seek);
+
+    my $yt = WebService::YTSearch->new(key => $ENV{YOUTUBE_API_KEY});
+    my %query = (q => $seek, type => 'video', order => 'date', maxResults => 1);
+    my $r = $yt->search(%query);
+    my $url = 'https://www.youtube.com/watch?v=' . $r->{items}[0]{id}{videoId};
+    $interpretation .= qq|\n\n<a href="$url" target="_blank" rel="noopener noreferrer">$url<\/a>|;
   }
 
   $c->render(
