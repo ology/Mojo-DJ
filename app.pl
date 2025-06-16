@@ -168,7 +168,7 @@ __DATA__
     <hr>
     <%== fix_latin($interp) %>
     <p></p>
-    <audio controls><source type="audio/wav" src="/out.wav"></audio>
+    Transcript:<br><audio controls><source type="audio/wav" src="/out.wav"></audio>
 % }
 
 @@ layouts/default.html.ep
