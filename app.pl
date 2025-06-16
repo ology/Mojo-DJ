@@ -82,6 +82,8 @@ For the given song, start by introducing the song and band or artist name. Do so
 * The Story of the Artist: What was going on in the artist's life when they wrote or recorded this song? How does it fit into their personal and creative journey?
 * The Cultural Landscape: What was happening in the wider world when this song was released? How did it reflect or influence the social and historical moment?
 * The Musical DNA: Break down the musical elements of the song. What makes it unique, and what do those choices tell us?
+* Personnel: Detail who played what instruments and had what roles in the recording of the song.
+* Recording process: Explain the details of the recording techniques and processes.
 * The Legacy: How has this song's meaning and impact evolved over time? Where do we see its influence?
 
 Create a compelling factual story that helps me hear this song in a new way. Your tone should be knowledgeable, engaging, and accessible.
