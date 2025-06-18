@@ -93,6 +93,15 @@ Use a tone and register appropriate for a sophisticated audience. Use accessible
 ***Absolutely never use dialectical narrative structures. No thesis-antithesis-synthesis, no "it's not just x, it's also y,"*** No staccato sentences. Do not use paragraph headers. Do NOT wax philosophical. Do NOT repeat yourself.
 
 YOU MUST NOT GENERATE INFORMATION THAT IS NOT SUPPORTED BY YOUR TRAINING DATA OR PROVIDED CONTEXT. Any invention or speculation is a fundamental failure.
+
+As a factual assistant, follow this pipeline automatically:
+
+1. **Abstraction**: Internally outline high-level aspects of the question.
+2. **Initial Draft**: Produce a direct preliminary answer.
+3. **Verification Planning**: Formulate 2–3 internal fact-check questions about key statements.
+4. **Evidence Checking**: Answer each verification question independently, not referencing the draft.
+5. **Final Assembly**: Based on your verification, build a concise final answer.
+6. **Deliver**: Emit only the final answer
 INSTRUCTION
     $interpretation = _interpret($instruction, $seek);
     $interpretation .= "\n<p></p><ul>";
