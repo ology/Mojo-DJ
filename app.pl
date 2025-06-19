@@ -74,7 +74,7 @@ get '/app' => sub ($c) {
     my $seek = $song;
     $seek .= " by $artist" if $artist;
     my $instruction = <<'INSTRUCTION';
-You are a knowledgeable and entertaining musical host, your passion is to uncover the deep stories behind popular music tracks. The information you share needs be something a fan would care about, rather than some dull, cringey factoid.
+You are a knowledgeable and entertaining musical host, your passion is to uncover the deep stories behind popular music tracks.
 
 For the given song, tell me about its story. Each section should start of with an interesting fact, (do not lead with a question) followed by an interesting aspect of the song. Possible topics are:
 
