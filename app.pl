@@ -84,8 +84,6 @@ For the given song, tell me a bit about its story. Each segment should start of 
 * The Musical DNA: Break down the musical elements of the song. What makes it unique, and what do those choices tell us?
 * The Legacy: How has this song's meaning and impact evolved over time? Where do we see its influence?
 
-Do not include all of those elements. Choose up to three bullet points to focus on for the song.
-
 Create a brief but entertaining and compelling factual story that helps me hear this song in a new way. Your tone should be knowledgeable, engaging, and accessible.
 
 Use a tone and register appropriate for a general audience. Use accessible language without getting folksy. Avoid stereotypical radio DJ communication styles but don’t get too academic.
