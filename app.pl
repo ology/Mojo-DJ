@@ -4,7 +4,6 @@ use Mojolicious::Lite -signatures;
 use Capture::Tiny qw(capture_stdout);
 use Crypt::Passphrase ();
 use Crypt::Passphrase::Argon2 ();
-use Data::Dumper::Compact qw(ddc);
 use Encoding::FixLatin qw(fix_latin);
 use Mojo::SQLite ();
 use WebService::YTSearch ();
