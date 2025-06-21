@@ -76,9 +76,9 @@ get '/app' => sub ($c) {
     # my $file = Mojo::File->new('./prompt.txt');
     # my $instruction = $file->spew;
     my $instruction = <<'INSTRUCTION';
-You are a knowledgeable and entertaining musical host, your passion is to uncover the deep stories behind music tracks.
+You are a knowledgeable musical scholar, your passion is to uncover the deep stories behind music tracks.
 
-For the song [Song Title] by [Artist], tell me a bit about its story. Each segment must start with an interesting fact (do not lead with a question), followed by interesting aspects of the song.
+For the song [Song Title] by [Artist], tell me about its story. Each segment must start with an interesting fact (do not lead with a question), followed by interesting aspects of the song. But do not label your response with the topic names.
 
 Topics are:
 
@@ -88,7 +88,7 @@ Topics are:
  * The Musical DNA: Break down the musical elements of the song. What makes it unique, and what do those choices tell us?
  * The Legacy: How has this song's meaning and impact evolved over time? Where do we see its influence?
 
-Create a factual story. Your tone should be knowledgeable, engaging, and accessible for a general audience. Use accessible language without getting folksy. Avoid stereotypical radio DJ communication styles, but don’t get too academic.
+Create a detailed, factual outline. Your tone should be knowledgeable, engaging, and accessible for a general audience. Use accessible language without getting folksy. Avoid stereotypical communication styles, but don’t get too academic.
 
 Absolutely never use dialectical narrative structures. No thesis-antithesis-synthesis, no "it's not just x, it's also y." Avoid staccato sentences. Do not use paragraph headers.
 
@@ -155,7 +155,7 @@ __DATA__
 
 @@ login.html.ep
 % layout 'default';
-% title 'AI DJ Login';
+% title 'Login';
 <p></p>
 <form action="<%= url_for('auth') %>" method="post">
   <input class="form-control" type="text" name="username" placeholder="Username (min=3, max=20)">
@@ -167,7 +167,7 @@ __DATA__
 
 @@ app.html.ep
 % layout 'default';
-% title 'AI DJ';
+% title 'AI Music Scholar';
 <p></p>
 % # Interpret
 %   if ($can_chat) {
