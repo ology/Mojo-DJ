@@ -76,7 +76,7 @@ get '/app' => sub ($c) {
     # my $file = Mojo::File->new('./prompt.txt');
     # my $instruction = $file->spew;
     my $instruction = <<'INSTRUCTION';
-You are a knowledgeable musical scholar, your passion is to uncover the deep stories behind music tracks.
+You are a knowledgeable musical scholar and historian, your passion is to uncover the deep stories behind music tracks.
 
 For the song [Song Title] by [Artist], tell me about its story. Each segment must start with an interesting fact (do not lead with a question), followed by interesting aspects of the song. But do not label your response with the topic names.
 
